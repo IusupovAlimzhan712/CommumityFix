@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>All Reports</h2>
+  <div id="map-list"></div>
+  <ul>
+    {% for rpt in reports %}
+      <li>
+        <strong>{{ rpt.title }}</strong>
+        <span class="badge">{{ rpt.status }}</span><br>
+        <small>{{ rpt.location }} — by {{ rpt.creator.username }}</small>
+      </li>
+    {% else %}
+      <li>No reports yet.</li>
+    {% endfor %}
+  </ul>
+  <script>
+    var map = L.map('map-list').setView([3.1390, 101.6869], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19}).addTo(map);
+    {% for rpt in reports %}
+      {% if rpt.latitude and rpt.longitude %}
+        L.marker([{{ rpt.latitude }},{{ rpt.longitude }}])
+          .bindPopup("<strong>{{ rpt.title }}</strong><br>{{ rpt.location|e }}")
+          .addTo(map);
+      {% endif %}
+    {% endfor %}
+  </script>
+{% endblock %}

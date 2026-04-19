@@ -1,0 +1,344 @@
+/* 1) Font & reset */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: #121419;
+  color: #DBE6FF;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* 2) Navigation (global) */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #121419;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  z-index: 1000;
+}
+nav .logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #DBE6FF;
+  text-decoration: none;
+}
+nav .nav-links a {
+  margin-left: 1.5rem;
+  color: #DBE6FF;
+  text-decoration: none;
+  font-weight: 500;
+}
+nav .nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* 3) Homepage hero (only on .home-page) */
+.home-page main.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: calc(100vh - 80px);
+  margin-top: 80px;
+  padding: 0 5%;
+  overflow: visible;
+}
+.home-page .hero-text {
+  flex: 0 0 40%;
+  text-align: center;
+  z-index: 2;
+}
+.home-page .hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #DBE6FF;
+}
+.home-page .gradient-text {
+  background: linear-gradient(135deg, #da22ff, #ff6fd8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.home-page .hero-subtext {
+  font-size: 1.5rem;
+  color: #A3BFFA;
+  margin-bottom: 2rem;
+  max-width: 90%;
+  margin: 0 auto 2rem;
+}
+.home-page .hero-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.home-page .hero-links a {
+  color: #61DAFB;
+  text-decoration: none;
+  font-weight: 500;
+}
+.home-page .hero-links a:hover {
+  text-decoration: underline;
+}
+
+/* Hero image wrapper with curved, gradient border */
+.home-page .hero-image-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translateY(-50%);
+  padding: 4px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #da22ff, #ff6fd8);
+  overflow: hidden;
+  z-index: 1;
+}
+.home-page .hero-image {
+  display: block;
+  width: clamp(700px, 65vw, 1000px);
+  height: auto;
+  border-radius: 26px;
+  object-fit: cover;
+}
+
+/* 4) Bottom ticker bar */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: #0e1018; /* slightly darker */
+  overflow: hidden;
+  z-index: 1000;
+}
+.ticker {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.ticker__inner {
+  display: inline-block;
+  white-space: nowrap;
+  padding-left: 100%;
+  animation: scroll 60s linear infinite; /* Slow down scrolling */
+}
+@keyframes scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* 5) Forms and inputs (other pages) */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  padding: 0 2rem;    /* added padding for responsiveness */
+}
+input,
+textarea,
+select {
+  background: transparent;
+  border: 1px solid #DBE6FF;
+  color: #DBE6FF;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  width: 250px;
+  border-radius: 4px;
+}
+button {
+  background: transparent;
+  border: 1px solid #DBE6FF;
+  color: #DBE6FF;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+button:hover {
+  background: #DBE6FF;
+  color: #121419;
+}
+
+/* 6) Lists (reports, etc.) */
+ul {
+  list-style: none;
+  padding: 1rem 2rem;
+  margin-top: 80px;
+}
+li {
+  margin-bottom: 1rem;
+}
+
+/* 7) Status badge */
+.badge {
+  display: inline-block;
+  background: #61DAFB;
+  color: #121419;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  margin-left: 0.5rem;
+}
+
+/* 8) Remove gradient from emojis in ticker */
+.ticker__inner span {
+  background: none; /* Remove gradient background from emojis */
+}
+
+/* 9) Map container responsiveness */
+#map,
+#map-list,
+#map-detail {
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  margin: 0 auto 1rem;
+}
+
+/* 10) Logo images */
+.hero-logo {
+  width: 50px;
+  height: auto;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.nav-logo {
+  width: 40px;
+  height: auto;
+  vertical-align: middle;
+  margin-right: 0.75rem;
+}
+
+/* 11) Page wrapper */
+.admin-page {
+  padding: 100px 2rem 2rem; /* allow for fixed nav */
+  background: #121419;
+  min-height: 100vh;
+}
+
+/* 12) Dashboard header */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.dashboard-header h2 {
+  font-size: 2.5rem;
+  color: #DBE6FF;
+  margin-bottom: 0.25rem;
+}
+.dashboard-subtitle {
+  color: #A3BFFA;
+  font-size: 1rem;
+}
+
+/* 13) Reports Grid */
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* 14) Report Card */
+.report-card {
+  background: #1E2230;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.report-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+.report-title {
+  font-size: 1.25rem;
+  color: #DBE6FF;
+}
+.report-meta {
+  font-size: 0.9rem;
+  color: #A3BFFA;
+  margin-bottom: 1rem;
+}
+.unassigned {
+  font-style: italic;
+  color: #F0AD4E;
+}
+
+/* 15) Status Badges */
+.badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+.status-open {
+  background: #61DAFB;
+  color: #121419;
+}
+.status-in_progress {
+  background: #F0AD4E;
+  color: #121419;
+}
+.status-fixed {
+  background: #5CB85C;
+  color: #121419;
+}
+
+/* 16) Actions */
+.form-inline {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+.form-inline select {
+  background: transparent;
+  border: 1px solid #DBE6FF;
+  color: #DBE6FF;
+  padding: 0.4rem;
+  border-radius: 4px;
+  min-width: 120px;
+}
+.btn {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-assign {
+  background: #61DAFB;
+  color: #121419;
+}
+.btn-status {
+  background: #F0AD4E;
+  color: #121419;
+}
+.btn:hover {
+  opacity: 0.9;
+}

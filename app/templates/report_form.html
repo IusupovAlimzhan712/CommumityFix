@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>New Report</h2>
+  <form method="post" action="{{ url_for('reports.new_report') }}">
+    <input name="title" placeholder="Title" required>
+    <textarea name="description" placeholder="Describe the issue" rows="4" required></textarea>
+    <div id="map"></div>
+    <input type="hidden" name="location" id="location" required>
+    <input type="hidden" name="latitude" id="latitude">
+    <input type="hidden" name="longitude" id="longitude">
+    <button type="submit">Submit</button>
+  </form>
+  <script>
+    var map = L.map('map').setView([3.1390, 101.6869], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19}).addTo(map);
+    var marker;
+    map.on('click', function(e){
+      if(marker) map.removeLayer(marker);
+      marker = L.marker(e.latlng).addTo(map);
+      document.getElementById('latitude').value = e.latlng.lat;
+      document.getElementById('longitude').value = e.latlng.lng;
+      document.getElementById('location').value =
+        e.latlng.lat.toFixed(5)+', '+e.latlng.lng.toFixed(5);
+    });
+  </script>
+{% endblock %}

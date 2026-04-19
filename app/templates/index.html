@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block body_class %}home-page{% endblock %}
+
+{% block content %}
+  <main class="hero">
+    <div class="hero-text">
+      <h1 class="hero-title">
+        Welcome to <span class="gradient-text">CommunityFix</span>
+        <img
+          src="{{ url_for('static', filename='logo.png') }}"
+          alt="CommunityFix Logo"
+          class="hero-logo"
+        >
+      </h1>
+
+      <p class="hero-subtext">
+        Empowering communities to report and resolve local issues—together.
+      </p>
+      <div class="hero-links">
+        <a href="{{ url_for('reports.list_reports') }}">View All Reports</a>
+        {% if current_user.is_authenticated and current_user.role == 'resident' %}
+          <a href="{{ url_for('reports.new_report') }}">Report an Issue</a>
+        {% endif %}
+        {% if current_user.is_authenticated and current_user.role == 'admin' %}
+          <a href="{{ url_for('admin.dashboard') }}">Admin Dashboard</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="hero-image-wrapper">
+      <img
+        src="{{ url_for('static', filename='map.png') }}"
+        alt="Map of community area"
+        class="hero-image"
+      >
+    </div>
+  </main>
+
+  <!-- Bottom ticker bar with “cool” credits -->
+  <footer class="bottom-bar">
+    <div class="ticker">
+      <div class="ticker__inner">
+        <!-- [scrolling content unchanged] -->
+        <span class="gradient-text">🚀 Made with ❤️ by Galal, Alimzhan, Aishah & Dharvin</span> &nbsp;&nbsp;|&nbsp;&nbsp;
+        <!-- … -->
+        <span class="gradient-text">© 2025 CommunityFix. All rights reserved. O/ ✨</span>
+      </div>
+    </div>
+  </footer>
+{% endblock %}

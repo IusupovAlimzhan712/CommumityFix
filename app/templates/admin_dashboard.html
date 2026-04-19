@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block body_class %}admin-page{% endblock %}
+
+{% block content %}
+  <div class="dashboard">
+    <header class="dashboard-header">
+      <h2>Admin Dashboard</h2>
+      <p class="dashboard-subtitle">Manage open reports, assign volunteers, and update statuses all in one place.</p>
+    </header>
+
+    <section class="reports-grid">
+      {% for rpt in reports %}
+        <div class="report-card">
+          <div class="report-card-header">
+            <h4 class="report-title">{{ rpt.title }}</h4>
+            <span class="badge status-{{ rpt.status }}">{{ rpt.status.replace('_', ' ')|title }}</span>
+          </div>
+          <div class="report-meta">
+            <strong>Assignee:</strong>
+            {% if rpt.assignee %}
+              {{ rpt.assignee.username }}
+            {% else %}
+              <span class="unassigned">Unassigned</span>
+            {% endif %}
+          </div>
+
+          <div class="report-actions">
+            <form method="post" action="{{ url_for('admin.assign', report_id=rpt.id) }}" class="form-inline">
+              <select name="volunteer_id" required>
+                <option value="">Assign to…</option>
+                {% for v in volunteers %}
+                  <option value="{{ v.id }}">{{ v.username }}</option>
+                {% endfor %}
+              </select>
+              <button type="submit" class="btn btn-assign">Assign</button>
+            </form>
+
+            <form method="post" action="{{ url_for('admin.change_status', report_id=rpt.id) }}" class="form-inline">
+              <select name="status">
+                <option value="open" {% if rpt.status=='open' %}selected{% endif %}>Open</option>
+                <option value="in_progress" {% if rpt.status=='in_progress' %}selected{% endif %}>In Progress</option>
+                <option value="fixed" {% if rpt.status=='fixed' %}selected{% endif %}>Fixed</option>
+              </select>
+              <button type="submit" class="btn btn-status">Update</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    </section>
+  </div>
+{% endblock %}

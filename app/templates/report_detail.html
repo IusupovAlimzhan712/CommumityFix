@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>{{ rpt.title }}</h2>
+  <p>{{ rpt.description }}</p>
+  <div id="map-detail"></div>
+  <script>
+    var map = L.map('map-detail').setView([{{ rpt.latitude }},{{ rpt.longitude }}],15);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19}).addTo(map);
+    L.marker([{{ rpt.latitude }},{{ rpt.longitude }}])
+     .addTo(map)
+     .bindPopup("<strong>{{ rpt.title }}</strong><br>{{ rpt.location|e }}")
+     .openPopup();
+  </script>
+{% endblock %}
